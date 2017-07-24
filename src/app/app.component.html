@@ -5,7 +5,9 @@
   </h1>
 </div>
 
-<h2> <button (click)="getUserList()">GetUsers</button> </h2>
+<div class="container">
+
+<h2> <button class="btn btn-primary" (click)="getUserList()">GetUsers</button> </h2>
 <p> Users found : {{searchCount}} </p>
 
 <md-list *ngIf="searchResult" >
@@ -16,3 +18,20 @@
       <h4 md-line> {{user.email}} </h4>
    </md-list-item>
 </md-list>
+
+<form #userForm="ngForm" (ngSubmit)="onSubmit(userForm.value)">
+  <div class="form-group">
+    <label for="firstName">First Name</label>
+    <input type="text" class="form-control" id="firstName" placeholder="Jhon" name="firstName" ngModel>
+  </div>
+  <div class="form-group">
+    <label for="lastName">Last Name</label>
+    <input type="text" class="form-control" id="lastName" placeholder="Doe" name="lastName" ngModel>
+  </div>
+  <div class="form-group">
+    <label for="email">email</label>
+    <input type="text" class="form-control" id="email" placeholder="jhondoe@abc.com" name="email" ngModel>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+</div>

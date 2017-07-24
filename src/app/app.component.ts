@@ -1,15 +1,20 @@
 import { Component } from '@angular/core';
 import { Http } from '@angular/http'
+import { Headers, RequestOptions } from '@angular/http';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
+
 export class AppComponent {
+
   title = 'Peeeeeeeeepppaaaaaa';
   public searchResult;
   public searchCount = 0;
   public searchText;
+
   constructor(private http: Http) {
     this.title = "DatePicker App";
   }
@@ -27,4 +32,13 @@ export class AppComponent {
     this.searchText = event.target.value;
   }
 
+  onSubmit(value: any) {
+    let serializedForm = JSON.stringify(value);
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+     this.http.post('/user', serializedForm, options).subscribe(
+          data => console.log("success!", data),
+          error => console.error("couldn't post because", error)
+        );
+  }
 }
