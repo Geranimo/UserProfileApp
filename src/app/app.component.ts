@@ -37,7 +37,23 @@ export class AppComponent {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
      this.http.post('/user', serializedForm, options).subscribe(
-          data => console.log("success!", data),
+          data => { console.log("success!", data);
+          this.getUserList();
+        },
+          error => console.error("couldn't post because", error)
+        );
+  }
+
+  deleteUser(value: String){
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    console.log("Deleting user with id " + value);
+    let options = new RequestOptions({ headers: headers });
+     this.http.delete('/user/'+ value, options).subscribe(
+          data => {
+
+          console.log("user successfully deleted!", data);
+           this.getUserList();
+        },
           error => console.error("couldn't post because", error)
         );
   }
